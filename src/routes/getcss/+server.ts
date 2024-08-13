@@ -1,20 +1,20 @@
-import { promises as fs } from 'fs';
-import path from 'path';
-
 export async function GET({ params, url }) {
-	let fromCol = url.searchParams.get('from');
-	let viaCol = url.searchParams.get('via');
-	let toCol = url.searchParams.get('to');
+	let fromCol: string | null = url.searchParams.get('from');
+	let viaCol: string | null = url.searchParams.get('via');
+	let toCol: string | null = url.searchParams.get('to');
 
-	const filePath = path.join(process.cwd(), 'static', 'MagicBouton_b0.1.css');
+	const response = await fetch('/MagicBouton_b0.1.css');
+	if (!response.ok) {
+		throw new Error('Network response was not ok');
+	}
 
-	let fileContent = await fs.readFile(filePath, 'utf-8');
+	let cssContent = await response.text();
+	cssContent = cssContent
+		.replace('#fa5477', fromCol ?? '#fa5477')
+		.replace('#ef4b4b', viaCol ?? '#ef4b4b')
+		.replace('#f2e3c9', toCol ?? '#f2e3c9');
 
-	fileContent = fileContent.replace('#fa5477', fromCol);
-	fileContent = fileContent.replace('#ef4b4b', viaCol);
-	fileContent = fileContent.replace('#f2e3c9', toCol);
-
-	return new Response(fileContent, {
+	return new Response(cssContent, {
 		status: 200,
 		headers: {
 			'Content-type': 'text/css',

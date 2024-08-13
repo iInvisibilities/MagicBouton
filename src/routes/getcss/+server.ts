@@ -6,8 +6,7 @@ export async function GET({ params, url }) {
 	let viaCol = url.searchParams.get('via');
 	let toCol = url.searchParams.get('to');
 
-	const staticFolder = path.join(process.cwd(), 'static');
-	const filePath = path.join(staticFolder, 'MagicBouton_b0.1.css');
+	const filePath = path.join(process.cwd(), 'static', 'MagicBouton_b0.1.css');
 
 	let fileContent = await fs.readFile(filePath, 'utf-8');
 

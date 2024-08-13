@@ -1,11 +1,15 @@
-import fs from 'fs';
+import { promises as fs } from 'fs';
+import path from 'path';
 
 export async function GET({ params, url }) {
 	let fromCol = url.searchParams.get('from');
 	let viaCol = url.searchParams.get('via');
 	let toCol = url.searchParams.get('to');
 
-	let fileContent = fs.readFileSync('/MagicBouton_b0.1.css', 'utf-8');
+	const staticFolder = path.join(process.cwd(), 'static');
+	const filePath = path.join(staticFolder, 'MagicBouton_b0.1.css');
+
+	let fileContent = await fs.readFile(filePath, 'utf-8');
 
 	fileContent = fileContent.replace('#fa5477', fromCol);
 	fileContent = fileContent.replace('#ef4b4b', viaCol);

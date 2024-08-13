@@ -5,7 +5,7 @@ export async function GET({ params, url }) {
 	let viaCol = url.searchParams.get('via');
 	let toCol = url.searchParams.get('to');
 
-	let fileContent = fs.readFileSync('src/../static/MagicBouton_b0.1.css', 'utf-8');
+	let fileContent = fs.readFileSync('src/lib/MagicBouton_b0.1.css', 'utf-8');
 
 	fileContent = fileContent.replace('#fa5477', fromCol);
 	fileContent = fileContent.replace('#ef4b4b', viaCol);

@@ -3,7 +3,7 @@ export async function GET({ params, url }) {
 	let viaCol: string | null = url.searchParams.get('via');
 	let toCol: string | null = url.searchParams.get('to');
 
-	const response = await fetch('/MagicBouton_b0.1.css');
+	const response = await fetch('https://www.magicbouton.art/MagicBouton_b0.1.css');
 	if (!response.ok) {
 		throw new Error('Network response was not ok');
 	}
